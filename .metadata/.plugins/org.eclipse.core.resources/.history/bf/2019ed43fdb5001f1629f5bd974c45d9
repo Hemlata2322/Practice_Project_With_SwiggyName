@@ -1,0 +1,30 @@
+package swiggyTestPages;
+
+import org.testng.annotations.*;
+
+public class ReadingTestDataUsingLoop {
+	
+	@BeforeClass
+	public void setup()
+	{
+		
+	}
+	
+	@Test(dataProvider = "")
+	public void validateReadingDataFromExecelUsingLoop()
+	{
+		
+	}
+
+	@DataProvider
+	public void getData()
+	{
+		
+	}
+	
+	@AfterClass
+	public void tearDown()
+	{
+		
+	}
+}

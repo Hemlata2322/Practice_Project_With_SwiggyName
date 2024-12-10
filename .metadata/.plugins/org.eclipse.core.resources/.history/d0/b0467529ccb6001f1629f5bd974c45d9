@@ -1,0 +1,35 @@
+package swiggyTestPages;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.*;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+public class signupUsingExcelExtentScreenshot {
+	
+	WebDriver driver;
+	ExtentReports extent;
+	ExtentSparkReporter spark;
+	ExtentTest test;
+	
+	@BeforeClass
+	public void setup()
+	{
+		
+	}
+	
+	@Test
+	public void validateSignup()
+	{
+		
+	}
+	
+	@AfterClass
+	public void tearDown()
+	{
+		
+	}
+
+}

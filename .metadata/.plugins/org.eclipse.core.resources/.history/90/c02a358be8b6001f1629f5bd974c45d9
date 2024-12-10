@@ -1,0 +1,166 @@
+package swiggyTestPages;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+public class signupUsingExcelExtentScreenshot {
+	
+	WebDriver driver;
+	ExtentReports extent;
+	ExtentSparkReporter spark;
+	ExtentTest test;
+	TakesScreenshot screenshot;
+	
+	
+	@BeforeClass
+	public void setup() throws IOException
+	{
+		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		
+		extent = new ExtentReports();
+		String file = Paths.get(System.getProperty("user.dir") + "./TestReports/signupReport.html").toString();
+		spark = new ExtentSparkReporter(file);
+		extent.attachReporter(spark);	
+		
+	}
+	@Test(dataProvider = "readLoginData")
+	public void validateLogin(String userName, String password, ITestResult result)
+	{
+		test = extent.createTest("Validating Login Funcitonality");
+		test.info("Navigating to facebook website");
+		driver.get("https://www.facebook.com/");
+		test.info("Entering the username");
+		driver.findElement(By.id("email")).sendKeys(userName);
+		test.info("Entering password");
+		driver.findElement(By.id("pass")).sendKeys(password);
+		test.info("Clicking on Login");
+		driver.findElement(By.name("login")).click();
+		test.addScreenCaptureFromPath(captureScreenshot(result).toString(), "LoginScreenshot");
+	}
+	
+
+	@Test(dataProvider = "readSignupData")
+	public void validateSignup(String firstName, String lastName, String email, ITestResult result)
+	{
+		test = extent.createTest("Validating Signup Functionality");
+		test.info("Login to facebook website");
+		driver.get("http://www.facebook.com/");
+		test.info("Switching to signup page");
+		driver.findElement(By.xpath("//a[text() = 'Create new account']")).click();
+		test.info("Entering first name");
+		driver.findElement(By.name("firstname")).sendKeys(firstName);
+		test.info("Entering last name");
+		driver.findElement(By.name("lastname")).sendKeys(lastName);
+		test.info("Selecting the date of birth");
+		Select daySelect = new Select(driver.findElement(By.id("day")));
+		daySelect.selectByVisibleText("9");
+		Select monthSelect = new Select(driver.findElement(By.id("month")));
+		monthSelect.selectByVisibleText("Dec");
+		Select yearSelect = new Select(driver.findElement(By.id("year")));
+		yearSelect.selectByVisibleText("2017");		
+		test.info("Selecting the gender as Female");
+		driver.findElement(By.xpath("//label[text() = 'Female']/child::input[@id = 'sex']")).click();
+		test.info("Entering email address");
+		driver.findElement(By.name("reg_email__")).sendKeys(email);
+		test.info("Entering new password");
+	//	driver.findElement(By.id("password_step_input")).sendKeys("");
+		
+		test.addScreenCaptureFromPath(captureScreenshot(result).toString(), "ErrorOnNewPassword");
+		test.info("clicking on Sign Up");
+		driver.findElement(By.xpath("//button[text() = 'Sign Up' and @name = 'websubmit']")).click();	
+		
+	}
+
+	
+	@DataProvider
+	public Object[][] readSignupData() throws IOException
+	{
+		
+		File testDataFile = new File("./TestData/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(testDataFile);
+		XSSFWorkbook wk = new XSSFWorkbook(fis);
+		XSSFSheet sh = wk.getSheet("SignUpTestData");
+		
+		Object[][] arr = new Object[1][3];
+		arr[0][0] = sh.getRow(3).getCell(0).getStringCellValue();
+		arr[0][1] = sh.getRow(3).getCell(1).getStringCellValue();
+		arr[0][2] = sh.getRow(3).getCell(2).getStringCellValue();
+		wk.close();
+		return arr;
+		
+	}
+	@DataProvider
+	public Object[][] readLoginData()
+	{
+		try {
+		File dataFile = new File("./TestData/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(dataFile);
+		XSSFWorkbook wk = new XSSFWorkbook(fis);
+			XSSFSheet sh = wk.getSheet("UserLoginTestData");
+			Object[][] arr = new Object[1][2];
+			
+			arr[0][0] = sh.getRow(1).getCell(0).getStringCellValue();
+			arr[0][1] = sh.getRow(1).getCell(1).getStringCellValue();
+			
+			wk.close();
+			return arr;			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		return null;
+	}
+	
+	@AfterMethod
+	public String captureScreenshot(ITestResult result) 
+	{
+		try
+		{
+		screenshot = (TakesScreenshot)driver;
+		File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
+		
+		String methodName = result.getMethod().getMethodName();
+		String timeStamp = new SimpleDateFormat("yyyymmdd_HHmmss").format(new Date());
+		String screenshotPath = Paths.get(System.getProperty("user.dir") + "./Screenshots/" + methodName + timeStamp +".png").toString();
+		File desFile = new File(screenshotPath);
+		FileUtils.copyFile(srcFile, desFile);
+		return screenshotPath;
+		}
+		catch(Exception e)
+		{
+			test.fail("Unable to capture screenshot due to " + e.getMessage());
+		}
+		return null;
+	}
+	@AfterClass
+	public void tearDown()
+	{
+		driver.quit();
+		extent.flush();
+	}
+
+}

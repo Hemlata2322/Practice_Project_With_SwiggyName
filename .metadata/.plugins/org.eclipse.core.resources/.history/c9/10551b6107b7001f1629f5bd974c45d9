@@ -1,0 +1,47 @@
+package swiggyTestPages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.*;
+
+public class ClosingSecondWindow {
+	WebDriver driver;
+	@BeforeMethod
+	public void setup()
+	{
+		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver= new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.google.com/");
+		
+	}
+	
+	@Test
+	public void switchingAndClsoingSecondWindow() throws InterruptedException
+	{
+		driver.findElement(By.id("APjFqb")).sendKeys("Selenium");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//span[text() = 'selenium']/b[text() = ' interview questions and answers']")).click();
+		Thread.sleep(1000);
+		//span[contains(text(),'InterviewBit')])[2]
+				
+		WebElement link = driver.findElement(By.xpath("//a/h3[text() = 'Top 70+ Selenium Interview Questions and Answers (2024)']"));
+		Actions act = new Actions(driver);
+		act.keyDown(Keys.CONTROL).click(link).keyUp(Keys.CONTROL).build().perform();
+		
+		WebElement<List> handles = driver.getWindowHandles();
+		
+	}
+	
+	@AfterMethod
+	public void tearDown()
+	{
+		//driver.quit();
+	}
+
+}

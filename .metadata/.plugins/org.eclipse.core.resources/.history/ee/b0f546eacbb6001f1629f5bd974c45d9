@@ -1,0 +1,25 @@
+package swiggyTestPages;
+
+import org.testng.annotations.*;
+
+public class signupUsingExcelExtentScreenshot {
+	
+	@BeforeClass
+	public void setup()
+	{
+		
+	}
+	
+	@Test
+	public void validateSignup()
+	{
+		
+	}
+	
+	@AfterClass
+	public void tearDown()
+	{
+		
+	}
+
+}

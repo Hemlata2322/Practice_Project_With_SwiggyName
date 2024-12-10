@@ -1,0 +1,27 @@
+package swiggyTestPages;
+
+import org.testng.annotations.*;
+
+public class ParallelExecutionUsingTestngxml {
+
+	@BeforeClass
+	public void setup()
+	{
+		
+	}
+	
+	@Test(dataProvider = "getData")
+	public void checkingParallelExecution()
+	{
+		
+	}
+	
+	@DataProvider(parallel = true)
+	public Object[][] getData()
+	{
+		Object[][] arr = {{"email1", "pass"},{"email2", "pass"}};
+		
+		return arr;
+		
+	}
+}

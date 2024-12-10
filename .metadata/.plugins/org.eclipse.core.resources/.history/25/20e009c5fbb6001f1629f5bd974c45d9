@@ -1,0 +1,31 @@
+package swiggyTestPages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
+public class ClosingSecondWindow {
+	WebDriver driver;
+	@BeforeMethod
+	public void setup()
+	{
+		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver= new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://www.google.com/");
+		
+	}
+	
+	@Test
+	public void switchingAndClsoingSecondWindow()
+	{
+		
+	}
+	
+	@AfterMethod
+	public void tearDown()
+	{
+		driver.quit();
+	}
+
+}

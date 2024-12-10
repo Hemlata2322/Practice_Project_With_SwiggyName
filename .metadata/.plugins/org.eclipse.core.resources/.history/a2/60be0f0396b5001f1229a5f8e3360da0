@@ -1,0 +1,43 @@
+package swiggyTestPages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.*;
+
+public class SwiggyRegistration {
+	
+	
+	@BeforeClass
+	public void setup()
+	{
+		
+	}
+	
+	@Test(dataProvider = "sendData")
+	public void validateRegistration(String userName, String email)
+	{
+		DesiredCapabilities cap = null;
+		
+	}
+	
+	@DataProvider(parallel = true)
+	public Object[][] sendData()
+	{
+		Object arr[][] = new Object[2][2];
+		
+		arr[0][0] = "Name1";
+		arr[0][1] = "email1";
+		
+		arr[1][0] = "Name2";
+		arr[1][1] = "email2";
+		
+		return arr;
+				
+	}
+	@AfterClass
+	public void tearDown()
+	{
+		
+	}
+
+}

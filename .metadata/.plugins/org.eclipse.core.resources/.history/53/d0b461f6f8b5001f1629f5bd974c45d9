@@ -1,0 +1,37 @@
+package swiggyTestPages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
+public class ReadingTestDataFromExcelUsingDataProvider {
+	
+	WebDriver driver;
+	@BeforeClass
+	public void setup()
+	{
+		System.getProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+	
+	@Test(dataProvider = "")
+	public void validateReadingDataFromExcel()
+
+	{
+		driver.get("http://www.facebook.com/");
+		
+	}
+	
+	@DataProvider
+public Object[][] getData()
+	{
+		
+	}
+	
+	@AfterClass
+	public void tearDown()
+	{
+		driver.quit();
+	}
+}

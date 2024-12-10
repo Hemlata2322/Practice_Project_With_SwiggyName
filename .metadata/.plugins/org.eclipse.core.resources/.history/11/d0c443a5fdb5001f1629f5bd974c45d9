@@ -1,0 +1,43 @@
+package swiggyTestPages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
+public class ReadingTestDataUsingLoop {
+	
+	WebDriver driver;
+	@BeforeClass
+	public void setup()
+	{
+		System.getProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		
+	}
+	
+	@Test(dataProvider = "getData")
+	public void validateReadingDataFromExecelUsingLoop(String userName, String password)
+	{
+		driver.get("http://www.facebook.com/");
+		driver.findElement(By.id("email")).sendKeys(userName);
+		driver.findElement(By.id("pass")).sendKeys(password);
+		
+	}
+
+	@DataProvider
+	public void getData()
+	{
+		File dataFile = new File("./TestData/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(dataFile);
+		XSSFWorkbook wk = new XSSFWorkbook(fis);
+		
+	}
+	
+	@AfterClass
+	public void tearDown()
+	{
+		
+	}
+}

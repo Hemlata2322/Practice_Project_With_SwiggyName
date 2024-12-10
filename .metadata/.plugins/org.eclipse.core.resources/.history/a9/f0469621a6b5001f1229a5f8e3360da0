@@ -1,0 +1,34 @@
+package swiggyTestPages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
+public class ParallelExecutionUsingTestngxml {
+
+	public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
+	@BeforeClass
+	public void setup()
+	{
+		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		WebDriver localDriver = new ChromeDriver();
+		driver.set(localDriver);
+		localDriver.get("http://www.facebook.com/");
+		
+	}
+	
+	@Test(dataProvider = "getData")
+	public void checkingParallelExecution()
+	{
+		
+	}
+	
+	@DataProvider(parallel = true)
+	public Object[][] getData()
+	{
+		Object[][] arr = {{"email1", "pass"},{"email2", "pass"}};
+		
+		return arr;
+		
+	}
+}

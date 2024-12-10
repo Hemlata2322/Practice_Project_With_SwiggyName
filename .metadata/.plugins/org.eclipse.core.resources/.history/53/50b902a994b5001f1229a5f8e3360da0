@@ -1,0 +1,39 @@
+package swiggyTestPages;
+
+import org.testng.annotations.*;
+
+public class SwiggyRegistration {
+	
+	@BeforeClass
+	public void setup()
+	{
+		
+	}
+	
+	@Test
+	public void validateRegistration()
+	{
+		
+	}
+	
+	@DataProvider(parallel = true)
+	public object[][] sendData()
+	{
+		object arr[][] = new object[2][2];
+		
+		arr[][] = "";
+		arr[][] = "";
+		
+		arr[][] = "";
+		arr[][] = "";
+		
+		retrun arr;
+				
+	}
+	@AfterClass
+	public void tearDown()
+	{
+		
+	}
+
+}

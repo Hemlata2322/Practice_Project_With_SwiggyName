@@ -1,0 +1,68 @@
+package swiggyTestPages;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
+public class ReadingTestDataFromExcelUsingDataProvider {
+
+	WebDriver driver;
+
+	@BeforeClass
+	public void setup() {
+		System.getProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+
+	@Test(dataProvider = "getData")
+	public void validateReadingDataFromExcel(String userName, String password, String email)
+
+	{
+		driver.get("http://www.facebook.com/");
+		driver.findElement(By.id("email")).sendKeys(userName);
+		driver.findElement(By.id("pass")).sendKeys(password);
+
+	}
+
+	@DataProvider
+	public Object[][] getData() throws IOException 
+	{
+		File dataFile = new File("./TestData/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(dataFile);
+		XSSFWorkbook wk = new XSSFWorkbook(fis);
+		XSSFSheet sh = wk.getSheet("SignUpTestData");
+		System.out.println(sh.getSheetName());
+		
+		Object[][] arr = new Object[4][3];
+		arr[1][0] = sh.getRow(1).getCell(0).getStringCellValue();
+		arr[1][1] = sh.getRow(1).getCell(1).getStringCellValue();
+		arr[1][2] = sh.getRow(1).getCell(1).getStringCellValue();
+		
+		arr[2][0] = sh.getRow(2).getCell(0).getStringCellValue();
+		arr[2][1] = sh.getRow(2).getCell(1).getStringCellValue();
+		arr[1][2] = sh.getRow(1).getCell(1).getStringCellValue();
+		
+		arr[3][0] = sh.getRow(3).getCell(0).getStringCellValue();
+		arr[3][1] = sh.getRow(3).getCell(1).getStringCellValue();
+		arr[1][2] = sh.getRow(1).getCell(1).getStringCellValue();
+		
+		wk.close();
+		
+		return arr;
+		
+		
+	}
+
+	@AfterClass
+	public void tearDown() {
+		driver.quit();
+	}
+}

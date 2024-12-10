@@ -1,0 +1,32 @@
+package swiggyTestPages;
+
+import org.testng.annotations.*;
+
+public class ReadingTestDataFromExcelUsingDataProvider {
+	
+	@BeforeClass
+	public void setup()
+	{
+		
+	}
+	
+	@Test(dataProvider = "")
+	public void validateReadingDataFromExcel()
+
+	{
+		
+	}
+	
+	@DataProvider
+	public Object[][] getData()
+	{
+		Object[][] arr = {{},{}};
+		return arr;
+	}
+	
+	@AfterClass
+	public void tearDown()
+	{
+		
+	}
+}
