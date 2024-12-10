@@ -20,6 +20,7 @@ public class ClosingSecondWindow {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://www.google.com/");
+		
 	}
 	@Test
 	public void switchingAndClsoingSecondWindow() throws InterruptedException {
