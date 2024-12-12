@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="swiggyTestPages.ClosingSecondWindow">
+      <class name="swiggyTestPages.ReadingConfigData">
         <methods>
-          <include name="switchingAndClsoingSecondWindow"/>
-          <include name="setup"/>
+          <include name="validatePropertyFunctions"/>
           <include name="tearDown"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- swiggyTestPages.ClosingSecondWindow -->
+      </class> <!-- swiggyTestPages.ReadingConfigData -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

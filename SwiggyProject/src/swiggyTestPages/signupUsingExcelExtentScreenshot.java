@@ -60,6 +60,7 @@ public class signupUsingExcelExtentScreenshot {
 		test.info("Clicking on Login");
 		driver.findElement(By.name("login")).click();
 		test.addScreenCaptureFromPath(captureScreenshot(result).toString(), "LoginScreenshot");
+		
 	}
 	
 

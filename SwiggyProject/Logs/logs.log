@@ -1,0 +1,3 @@
+[INFO ] 2024-12-11 20:57:54.438 [main] LoggerTestUsingLog4j2 - Firefox setup is done
+[INFO ] 2024-12-11 20:57:58.380 [main] LoggerTestUsingLog4j2 - Implicitly waited for 10 secs
+[INFO ] 2024-12-11 20:58:00.242 [main] LoggerTestUsingLog4j2 - Logged into Google Search Engine

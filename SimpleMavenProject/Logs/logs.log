@@ -1,0 +1,10 @@
+[INFO ] 2024-12-11 17:22:07.680 [main] LoggerTest - Setting up Firefox Browser
+[INFO ] 2024-12-11 17:22:16.963 [main] LoggerTest - Initiating the Firefox driver
+[INFO ] 2024-12-11 17:22:17.242 [main] LoggerTest - Maximizing the window
+[INFO ] 2024-12-11 17:22:17.251 [main] LoggerTest - Implicitly waiting for 10 secs
+[INFO ] 2024-12-11 17:27:34.070 [main] LoggerTest - Setting up Firefox Browser
+[INFO ] 2024-12-11 17:27:40.858 [main] LoggerTest - Initiating the Firefox driver
+[INFO ] 2024-12-11 17:27:41.155 [main] LoggerTest - Maximizing the window
+[INFO ] 2024-12-11 17:27:41.230 [main] LoggerTest - Implicitly waiting for 10 secs
+[INFO ] 2024-12-11 17:27:44.588 [main] LoggerTest - Navigating to Google Search Engine
+[INFO ] 2024-12-11 17:27:44.657 [main] LoggerTest - Navigated to Google

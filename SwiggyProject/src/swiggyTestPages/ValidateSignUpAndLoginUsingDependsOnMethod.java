@@ -81,7 +81,8 @@ public class ValidateSignUpAndLoginUsingDependsOnMethod {
 		arr[3][2] = sh.getRow(3).getCell(2).getStringCellValue();		
 		
 		wk.close();
-		
+		fis.close();
+				
 		return arr;	
 		
 	}
